@@ -30,6 +30,18 @@ app.get('/api/students',(req, res) => {
   res.json(students)
 })
 
+app.post('/api/students',(req, res) => {
+  const {name, course} = req.body
+  const id = students.length + 1
+  const newStudent = {id, name, course}
+  students.push(newStudent)
+
+  res.json(201).json({
+    message: "Student added successfully",
+    student: newStudent
+  })
+})
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)
 })
