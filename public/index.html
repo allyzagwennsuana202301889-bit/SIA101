@@ -7,6 +7,25 @@
   <title>Document</title>
 </head>
 <body>
-  Yo waddup
+  <h1>Students List</h1>
+  <button onclick ="loadStudents()">Load Students</button>
+  <ul id="list"></ul>
+
+<script>
+  const apiURL = `http://localhost:3000`
+  async function loadStudents(){
+    const res = await fetch(`${apiURL}/api/students`)
+    const data = await res.json()
+
+    const list = document.getElementById('list')
+    list.innerHTML = ''
+
+    data.forEach((students) => {
+      const li = document.createElement('li')
+      li.textContent = `ID:${students.id} - Name:${students.name} - Course:${students.course}`
+      list.appendChild(li)
+    })
+  }
+</script>
 </body>
 </html>
